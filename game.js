@@ -1,5 +1,5 @@
 $(function() {
-  $('container').on('click', function(event) {
+  $('.container').on('click', function(event) {
     let clicked = $(event.target);
     clicked.css('backgroundColor', 'blue');
   });
