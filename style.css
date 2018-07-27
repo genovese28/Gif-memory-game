@@ -8,8 +8,10 @@
 .card {
   margin: 10px;
   width: 200px;
-  height: 270px;
+  height: 250px;
   background-color: aqua;
+  background-repeat: no-repeat;
+  background-size: 200px 250px;
 }
 h1 {
   margin: 20px;
