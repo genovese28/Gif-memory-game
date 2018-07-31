@@ -44,11 +44,16 @@ $(function() {
       // if you didn't click on a card, get out of this function
       return;
     }
-    let i = 0;
-    $('p').text(i++);
-
+    let totalClicks = 0;
+    //add up the clicks
     // select the p tag and set the innerText
     let clickedId = clicked.attr('id');
     clicked.css('backgroundImage', `url(${gifArray[clickedId]})`);
+    totalClicks++;
+    $('p').text = totalClicks;
+
+    //if the images are the same , match, cards stay flipped up
+    //if not stay for 1 second and turn back over
+    //only have click on two cards at a time.
   });
 });
