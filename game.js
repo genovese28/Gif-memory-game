@@ -50,7 +50,7 @@ $(function() {
     let clickedId = clicked.attr('id');
     clicked.css('backgroundImage', `url(${gifArray[clickedId]})`);
     totalClicks++;
-    $('p').text = totalClicks;
+    $('p').text(totalClicks);
 
     //if the images are the same , match, cards stay flipped up
     //if not stay for 1 second and turn back over
