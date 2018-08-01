@@ -13,6 +13,10 @@ let gifArray = [
   'https://media1.giphy.com/media/8Pmh8rTmPhKsTVH4oM/200w.webp'
 ];
 
+let totalClicks = 1;
+let firstCard = '';
+let cardsOpen = 0;
+
 function shuffle() {
   let current = gifArray.length - 1;
   while (current >= 0) {
@@ -44,14 +48,32 @@ $(function() {
       // if you didn't click on a card, get out of this function
       return;
     }
-    let totalClicks = 0;
+
     //add up the clicks
     // select the p tag and set the innerText
     let clickedId = clicked.attr('id');
     clicked.css('backgroundImage', `url(${gifArray[clickedId]})`);
+    $('#clicks').text(`${totalClicks}`);
     totalClicks++;
-    $('p').text(totalClicks);
 
+    if (!firstCard) {
+      firstCard = clicked;
+    } else {
+      setTimeout(function() {
+        if (
+          firstCard.css('backgroundImage') === clicked.css('backgroundImage')
+        ) {
+          cardsOpen += 2;
+          $('#open').text(`${cardsOpen}`);
+        } else {
+          firstCard.css('backgroundImage', '');
+          clicked.css('backgroundImage', '');
+        }
+        firstCard = '';
+      }, 500);
+    }
+
+    // only add clicks on unique cards
     //if the images are the same , match, cards stay flipped up
     //if not stay for 1 second and turn back over
     //only have click on two cards at a time.
