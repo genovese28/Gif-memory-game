@@ -36,6 +36,12 @@ function giveIdsToCards() {
   });
 }
 
+function gameReset() {
+  totalClicks = 1;
+  firstCard = '';
+  cardsOpen = 0;
+}
+
 // this function runs when the page loads
 $(function() {
   shuffle();
@@ -73,9 +79,8 @@ $(function() {
       }, 500);
     }
 
-    // only add clicks on unique cards
-    //if the images are the same , match, cards stay flipped up
-    //if not stay for 1 second and turn back over
-    //only have click on two cards at a time.
+    $('#startButton').on('click', function() {
+      location.reload();
+    });
   });
 });
