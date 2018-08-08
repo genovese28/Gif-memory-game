@@ -36,19 +36,3 @@ label {
   flex-direction: row;
   justify-content: center;
 }
-
-#flex-container p {
-  margin: 20px;
-  /* margin-left: 75px;
-  margin-top: 25px; */
-  font-size: 36px;
-  text-align: center;
-}
-
-/* p { */
-/* margin: 20 rem 20 rem 200 rem 25 rem; */
-/* } */
-/* margin-top
-margin-right
-margin-bottom
-margin-left */

@@ -13,9 +13,11 @@ let gifArray = [
   'https://media1.giphy.com/media/8Pmh8rTmPhKsTVH4oM/200w.webp'
 ];
 
-let totalClicks = 1;
+let totalClicks = 0;
 let firstCard = '';
+let firstId;
 let cardsOpen = 0;
+let waiting = false;
 
 function shuffle() {
   let current = gifArray.length - 1;
@@ -31,16 +33,12 @@ function shuffle() {
 
 function giveIdsToCards() {
   // give every card an ID
-  $('.card').each(function(idx, element) {
-    element.id = idx;
+  $('.card').each(function(idx, card) {
+    card.id = idx;
   });
 }
 
-function gameReset() {
-  totalClicks = 1;
-  firstCard = '';
-  cardsOpen = 0;
-}
+// How do you know if and when to use the $?
 
 // this function runs when the page loads
 $(function() {
@@ -50,32 +48,46 @@ $(function() {
   // an event listener
   $('.container').on('click', function(event) {
     let clicked = $(event.target);
-    if (clicked.attr('class') !== 'card') {
-      // if you didn't click on a card, get out of this function
-      return;
-    }
 
     //add up the clicks
-    // select the p tag and set the innerText
     let clickedId = clicked.attr('id');
+
+    if (clicked.attr('class') !== 'card' || clickedId === firstId || waiting) {
+      // || //how come I dont have to $('.card')
+      //cardsOpen === 2
+      return;
+
+      // ||
+      // clicked.attr('class') !== clicked.css('backgroundColor')
+      //why put card in '' and why arent we returning from other funtions, whereare the cb being called
+      // if you didn't click on a card, get out of this function
+    }
+
     clicked.css('backgroundImage', `url(${gifArray[clickedId]})`);
-    $('#clicks').text(`${totalClicks}`);
     totalClicks++;
+    //cardsOpen++;
+    $('#clicks').text(`${totalClicks}`);
 
     if (!firstCard) {
       firstCard = clicked;
+      firstId = clickedId;
     } else {
+      waiting = true;
       setTimeout(function() {
         if (
-          firstCard.css('backgroundImage') === clicked.css('backgroundImage')
+          firstCard.css('backgroundImage') === clicked.css('backgroundImage') // firstCard is not a fn?
         ) {
           cardsOpen += 2;
+
           $('#open').text(`${cardsOpen}`);
         } else {
           firstCard.css('backgroundImage', '');
           clicked.css('backgroundImage', '');
         }
         firstCard = '';
+        firstId = null;
+        waiting = false;
+        // cardsOpen = 0;
       }, 500);
     }
 
